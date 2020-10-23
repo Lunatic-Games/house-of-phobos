@@ -15,12 +15,12 @@ func make_noise(volume):
 	var heard = []
 	for creature in hearing_creatures:
 		var target_location = Vector2(creature.position.x, creature.position.y)
-		var distance = calculate_distance(self.position, target_location)
+		var distance = calculate_distance(position, target_location)
 		
 		# Check all creatues in distance to hear noise
 		if distance <= volume:
 			# For each creature in range, do a raycast from location to their location
-			var result = space_state.intersect_ray(self.position, target_location)
+			var result = space_state.intersect_ray(position, target_location)
 			# every wall hit reduces volume level
 			if result:
 				print("Hit at point: ", result.position)
@@ -28,7 +28,8 @@ func make_noise(volume):
 			if distance <= volume:
 				# call "hear" on creature with calculated volume and location
 				volume -= distance
-				print(creature, "Heard the sound at volume: ", volume)
+				if creature.has_method("hear_noise"):
+					creature.hear_noise(volume, position)
 	
 func _physics_process(delta):
 	space_state = get_world_2d().direct_space_state
