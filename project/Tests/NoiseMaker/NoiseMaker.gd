@@ -27,7 +27,8 @@ func make_noise(volume):
 			# compare if volume is still greater than distance
 			if distance <= volume:
 				# call "hear" on creature with calculated volume and location
-				print(creature, "Heard the sound")
+				volume -= distance
+				print(creature, "Heard the sound at volume: ", volume)
 	
 func _physics_process(delta):
 	space_state = get_world_2d().direct_space_state
