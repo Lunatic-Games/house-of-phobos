@@ -8,5 +8,8 @@
 [node name="NoiseGenerator" parent="." instance=ExtResource( 2 )]
 position = Vector2( 213.072, 37.0245 )
 
+[node name="NoiseGenerator2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 520.653, 343.313 )
+
 [node name="Monster" parent="." instance=ExtResource( 1 )]
 position = Vector2( 403.789, 90.7691 )
