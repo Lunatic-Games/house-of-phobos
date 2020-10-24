@@ -17,5 +17,5 @@ func _ready():
 
 
 func _on_NoiseGenerator_mouse_entered():
-	var volume = 1000
+	var volume = 0.5
 	$NoiseMaker.make_noise(volume)
