@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sound_indicator.png-afe6173cff110c08f171ecf1f7cd82d2.stex"
+path="res://.import/noise_indicator.png-68cb5bceb1cc0fb11df088668d425bad.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UnusedAssets/sound_indicator.png"
-dest_files=[ "res://.import/sound_indicator.png-afe6173cff110c08f171ecf1f7cd82d2.stex" ]
+source_file="res://Tests/NoiseIndicator/noise_indicator.png"
+dest_files=[ "res://.import/noise_indicator.png-68cb5bceb1cc0fb11df088668d425bad.stex" ]
 
 [params]
 
