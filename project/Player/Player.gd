@@ -19,8 +19,12 @@ func change_held_tool(new_tool):
 	for t in Tool.values():
 		if t == new_tool:
 			get_node("Body/" + Tool.keys()[t]).visible = true
+			for raycast in get_node("Body/" + Tool.keys()[t] + "/Raycasts").get_children():
+				raycast.enabled = true
 		else:
 			get_node("Body/" + Tool.keys()[t]).visible = false
+			for raycast in get_node("Body/" + Tool.keys()[t] + "/Raycasts").get_children():
+				raycast.enabled = false
 
 func _physics_process(delta):
 	rotation = global_position.direction_to(get_viewport().get_mouse_position()).angle()
