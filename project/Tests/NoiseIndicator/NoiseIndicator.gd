@@ -2,14 +2,14 @@ extends Sprite
 
 var count = 0
 var max_size
-var tween
+onready var tween = get_node("Tween")
 var direction
 var spawn_offset
 var rng = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	tween = get_node("Tween")
+	rng.randomize()
 
 # player called function to use noise indicator
 func set_visibility(volume_percentage, target_noise):
