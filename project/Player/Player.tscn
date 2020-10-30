@@ -1,4 +1,4 @@
-[gd_scene load_steps=133 format=2]
+[gd_scene load_steps=132 format=2]
 
 [ext_resource path="res://Player/Assets/feet/idle/survivor-idle_0.png" type="Texture" id=1]
 [ext_resource path="res://Player/Assets/feet/run/survivor-run_7.png" type="Texture" id=2]
@@ -259,120 +259,76 @@ tracks/0/keys = {
 "values": [ ExtResource( 111 ), ExtResource( 116 ), ExtResource( 112 ), ExtResource( 110 ), ExtResource( 114 ), ExtResource( 115 ), ExtResource( 104 ), ExtResource( 118 ), ExtResource( 103 ), ExtResource( 120 ), ExtResource( 119 ), ExtResource( 117 ), ExtResource( 108 ), ExtResource( 113 ), ExtResource( 105 ), ExtResource( 107 ), ExtResource( 109 ), ExtResource( 106 ), ExtResource( 121 ) ]
 }
 
-[sub_resource type="CircleShape2D" id=9]
-radius = 23.0863
-
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
 ]]
 position = Vector2( 471.06, 279.832 )
+collision_mask = 0
 script = ExtResource( 82 )
 
-[node name="Feet" type="Node2D" parent="."]
-position = Vector2( -1.06, -4.832 )
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -12.4786, -17.3993, 8.92715, -17.6966, 37.4681, -11.7506, 36.5762, 3.11447, 38.9546, 19.1688, 8.92715, 21.2499, -13.0732, 18.2769, -18.4246, 11.7362, -24.3707, -6.99377 )
 
-[node name="Sprite" type="Sprite" parent="Feet"]
+[node name="Body" type="Node2D" parent="."]
+
+[node name="Feet" type="Node2D" parent="Body"]
+position = Vector2( -0.0599976, 0.167999 )
+
+[node name="Sprite" type="Sprite" parent="Body/Feet"]
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 13 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Feet"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Body/Feet"]
 anims/idle = SubResource( 1 )
 anims/run = SubResource( 2 )
 anims/walk = SubResource( 3 )
 
-[node name="Body" type="Node2D" parent="."]
-position = Vector2( -2.05951, 2.16803 )
+[node name="Top" type="Node2D" parent="Body"]
 
-[node name="Flashlight" type="Node2D" parent="Body"]
-visible = false
+[node name="Flashlight" type="Node2D" parent="Body/Top"]
 
-[node name="Sprite" type="Sprite" parent="Body/Flashlight"]
+[node name="Sprite" type="Sprite" parent="Body/Top/Flashlight"]
 position = Vector2( 9, 0 )
 scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 48 )
+texture = ExtResource( 30 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Body/Flashlight"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Body/Top/Flashlight"]
 anims/idle = SubResource( 4 )
 anims/run = SubResource( 5 )
 anims/walk = SubResource( 6 )
 
-[node name="Light2D" type="Light2D" parent="Body/Flashlight"]
-position = Vector2( 45.9995, 4.99997 )
-scale = Vector2( 1.725, 1.99451 )
+[node name="Light2D" type="Light2D" parent="Body/Top/Flashlight"]
+position = Vector2( 38.004, 5.33366 )
+scale = Vector2( 1.88518, 2.42723 )
 texture = ExtResource( 122 )
 offset = Vector2( 100, 0 )
 color = Color( 0.968627, 0.996078, 0.768627, 1 )
 energy = 0.75
 shadow_enabled = true
 
-[node name="Raycasts" type="Node2D" parent="Body/Flashlight"]
+[node name="Gun" type="Node2D" parent="Body/Top"]
+position = Vector2( -0.00048995, 0 )
 
-[node name="RayCast2D" type="RayCast2D" parent="Body/Flashlight/Raycasts"]
-enabled = true
-cast_to = Vector2( 350, 75 )
-
-[node name="RayCast2D2" type="RayCast2D" parent="Body/Flashlight/Raycasts"]
-enabled = true
-cast_to = Vector2( 350, -75 )
-
-[node name="RayCast2D3" type="RayCast2D" parent="Body/Flashlight/Raycasts"]
-enabled = true
-cast_to = Vector2( 350, 0 )
-
-[node name="RayCast2D4" type="RayCast2D" parent="Body/Flashlight/Raycasts"]
-enabled = true
-cast_to = Vector2( 350, -35 )
-
-[node name="RayCast2D5" type="RayCast2D" parent="Body/Flashlight/Raycasts"]
-enabled = true
-cast_to = Vector2( 350, 35 )
-
-[node name="Gun" type="Node2D" parent="Body"]
-position = Vector2( -1.00049, -15 )
-
-[node name="Sprite" type="Sprite" parent="Body/Gun"]
-position = Vector2( 9, 0 )
+[node name="Sprite" type="Sprite" parent="Body/Top/Gun"]
+position = Vector2( 4, -2 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 121 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Body/Gun"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Body/Top/Gun"]
 anims/idle = SubResource( 7 )
 anims/walk = SubResource( 8 )
 
-[node name="Light2D" type="Light2D" parent="Body/Gun"]
-position = Vector2( 36.9995, 16 )
-scale = Vector2( 1.045, 0.887363 )
+[node name="Light2D" type="Light2D" parent="Body/Top/Gun"]
+position = Vector2( 25.9995, 16 )
+scale = Vector2( 1.66904, 0.887363 )
 texture = ExtResource( 122 )
 offset = Vector2( 100, 0 )
 color = Color( 0.968627, 0.996078, 0.768627, 1 )
 energy = 0.75
 shadow_enabled = true
 
-[node name="Raycasts" type="Node2D" parent="Body/Gun"]
-position = Vector2( 20, 15 )
-
-[node name="RayCast2D" type="RayCast2D" parent="Body/Gun/Raycasts"]
-enabled = true
-cast_to = Vector2( 200, 25 )
-
-[node name="RayCast2D2" type="RayCast2D" parent="Body/Gun/Raycasts"]
-enabled = true
-cast_to = Vector2( 200, -25 )
-
-[node name="RayCast2D3" type="RayCast2D" parent="Body/Gun/Raycasts"]
-enabled = true
-cast_to = Vector2( 200, 0 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -4.06, 1.168 )
-shape = SubResource( 9 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2( 24.94, 2.168 )
-shape = SubResource( 9 )
-
-[node name="Light2D" type="Light2D" parent="."]
-position = Vector2( 6.44025, 4.16802 )
-scale = Vector2( 1.13, 1 )
+[node name="FOVLight" type="Light2D" parent="Body"]
+position = Vector2( 28.4651, 4.16803 )
+scale = Vector2( 1.5705, 1 )
 texture = ExtResource( 123 )
 energy = 0.5
