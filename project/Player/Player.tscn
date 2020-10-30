@@ -307,6 +307,7 @@ energy = 0.75
 shadow_enabled = true
 
 [node name="Gun" type="Node2D" parent="Body/Top"]
+visible = false
 position = Vector2( -0.00048995, 0 )
 
 [node name="Sprite" type="Sprite" parent="Body/Top/Gun"]

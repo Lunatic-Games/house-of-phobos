@@ -30,7 +30,8 @@ func _physics_process(_delta):
 
 # Set previous tool body to invisible and make new tool body visible
 func change_held_tool(new_tool):
-	get_node("Body/Top/" + Tools.keys()[held_tool]).visible = false
+	for t in Tools.values():
+		get_node("Body/Top/" + Tools.keys()[t]).visible = false
 	held_tool = new_tool
 	get_node("Body/Top/" + Tools.keys()[held_tool]).visible = true
 
