@@ -1,4 +1,4 @@
-[gd_scene load_steps=132 format=2]
+[gd_scene load_steps=134 format=2]
 
 [ext_resource path="res://Player/Assets/feet/idle/survivor-idle_0.png" type="Texture" id=1]
 [ext_resource path="res://Player/Assets/feet/run/survivor-run_7.png" type="Texture" id=2]
@@ -123,6 +123,7 @@
 [ext_resource path="res://Player/Assets/handgun/move/survivor-move_handgun_18.png" type="Texture" id=121]
 [ext_resource path="res://Player/Assets/flashlight_light.png" type="Texture" id=122]
 [ext_resource path="res://Player/Assets/player_light.png" type="Texture" id=123]
+[ext_resource path="res://Player/InteractArea.gd" type="Script" id=124]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -259,6 +260,9 @@ tracks/0/keys = {
 "values": [ ExtResource( 111 ), ExtResource( 116 ), ExtResource( 112 ), ExtResource( 110 ), ExtResource( 114 ), ExtResource( 115 ), ExtResource( 104 ), ExtResource( 118 ), ExtResource( 103 ), ExtResource( 120 ), ExtResource( 119 ), ExtResource( 117 ), ExtResource( 108 ), ExtResource( 113 ), ExtResource( 105 ), ExtResource( 107 ), ExtResource( 109 ), ExtResource( 106 ), ExtResource( 121 ) ]
 }
 
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 46.5789, 23.6158 )
+
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
 ]]
@@ -267,7 +271,7 @@ collision_mask = 0
 script = ExtResource( 82 )
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -12.4786, -17.3993, 8.92715, -17.6966, 37.4681, -11.7506, 36.5762, 3.11447, 38.9546, 19.1688, 8.92715, 21.2499, -13.0732, 18.2769, -18.4246, 11.7362, -24.3707, -6.99377 )
+polygon = PoolVector2Array( -12.4786, -17.3993, 8.92715, -17.6966, 42.084, -14.2514, 40.2112, 3.3537, 43.2078, 16.4639, 8.92715, 21.2499, -13.0732, 18.2769, -18.4246, 11.7362, -24.3707, -6.99377 )
 
 [node name="Body" type="Node2D" parent="."]
 
@@ -298,10 +302,10 @@ anims/run = SubResource( 5 )
 anims/walk = SubResource( 6 )
 
 [node name="Light2D" type="Light2D" parent="Body/Top/Flashlight"]
-position = Vector2( 38.004, 5.33366 )
+position = Vector2( 6.00403, 5.33366 )
 scale = Vector2( 1.88518, 2.42723 )
 texture = ExtResource( 122 )
-offset = Vector2( 100, 0 )
+offset = Vector2( 125, 0 )
 color = Color( 0.968627, 0.996078, 0.768627, 1 )
 energy = 0.75
 shadow_enabled = true
@@ -329,7 +333,17 @@ energy = 0.75
 shadow_enabled = true
 
 [node name="FOVLight" type="Light2D" parent="Body"]
-position = Vector2( 28.4651, 4.16803 )
-scale = Vector2( 1.5705, 1 )
+position = Vector2( 12.1133, -0.170185 )
+scale = Vector2( 1.89753, 1.63405 )
 texture = ExtResource( 123 )
 energy = 0.5
+shadow_enabled = true
+
+[node name="InteractArea" type="Area2D" parent="Body" groups=[
+"player_interact_area",
+]]
+script = ExtResource( 124 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/InteractArea"]
+position = Vector2( 22.8492, 0.374573 )
+shape = SubResource( 9 )

@@ -9,6 +9,7 @@ var mouse_look = false
 enum Tools {Flashlight, Gun}
 var owned_tools = [Tools.Flashlight, Tools.Gun]
 var held_tool = Tools.Gun
+var keys = []
 
 func _ready():
 	change_held_tool(held_tool)

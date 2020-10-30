@@ -1,0 +1,275 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Map/Interactables/Door/Door.gd" type="Script" id=2]
+[ext_resource path="res://Map/Interactables/Door/Door.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 42.9373, 5.04582 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 5.19405, 29.6673 )
+
+[sub_resource type="Animation" id=9]
+resource_name = "close"
+tracks/0/type = "value"
+tracks/0/path = NodePath("StaticBody2D:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -90.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CollisionShape2D2:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:opened")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "default"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("CollisionShape2D2:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("StaticBody2D:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:opened")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/path = NodePath("StaticBody2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("StaticBody2D:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -90.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollisionShape2D2:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:opened")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+uniform float outline_width = 2.0;
+uniform vec4 outline_color: hint_color;
+
+// Credit to nonomiyo
+// https://godotengine.org/qa/36111/2d-outline-shader-issue
+
+void fragment(){
+    vec4 col = texture(TEXTURE, UV);
+    vec2 ps = TEXTURE_PIXEL_SIZE * outline_width;
+    float a;
+    float maxa = col.a;
+    float mina = col.a;
+
+
+    for(float x = -1.0; x <= 1.0; x+=0.05) {
+        float y = 1.0 - (x*x);
+        if(vec2(x,y) == vec2(0.0)) {
+            continue; // ignore the center of kernel
+        }
+
+        a = texture(TEXTURE, UV + vec2(x,y)*ps).a;
+        maxa = max(a, maxa); 
+        mina = min(a, mina);
+    }
+
+    for(float x = -1.0; x <= 1.0; x+=0.05) {
+        float y = -1.0 + (x*x);
+        if(vec2(x,y) == vec2(0.0)) {
+            continue; // ignore the center of kernel
+        }
+
+        a = texture(TEXTURE, UV + vec2(x,y)*ps).a;
+        maxa = max(a, maxa); 
+        mina = min(a, mina);
+    }
+
+
+    // Fill transparent pixels only, don't overlap texture
+    if(col.a < 0.5) {
+        COLOR = mix(col, outline_color, maxa-mina);
+    } else {
+        COLOR = col;
+    }
+}
+"
+custom_defines = ""
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+shader_param/outline_width = 0.0
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 42.183, 4.32402 )
+
+[sub_resource type="OccluderPolygon2D" id=5]
+polygon = PoolVector2Array( -23.0683, 0.408469, 20.9039, 0.427117, 20.9039, 0.922434, -23.0842, 0.815113 )
+
+[node name="Door" type="Area2D" groups=[
+"interactable",
+]]
+script = ExtResource( 2 )
+opened = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 43.1391, 0.207678 )
+shape = SubResource( 1 )
+disabled = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2( 4.63528, -33.0416 )
+shape = SubResource( 7 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "default"
+anims/close = SubResource( 9 )
+anims/default = SubResource( 8 )
+anims/open = SubResource( 6 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D"]
+material = SubResource( 4 )
+position = Vector2( 34.6259, -0.508864 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 42.2184, 0.422317 )
+shape = SubResource( 2 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="StaticBody2D"]
+position = Vector2( 44.5477, -0.823223 )
+scale = Vector2( 1.94978, 1.5176 )
+occluder = SubResource( 5 )
+[connection signal="area_entered" from="." to="." method="_on_Door_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_Door_area_exited"]

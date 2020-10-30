@@ -1,0 +1,78 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Map/Interactables/Key/Key.gd" type="Script" id=2]
+[ext_resource path="res://Map/Interactables/Key/Key.png" type="Texture" id=3]
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+uniform float outline_width = 2.0;
+uniform vec4 outline_color: hint_color;
+
+// Credit to nonomiyo
+// https://godotengine.org/qa/36111/2d-outline-shader-issue
+
+void fragment(){
+    vec4 col = texture(TEXTURE, UV);
+    vec2 ps = TEXTURE_PIXEL_SIZE * outline_width;
+    float a;
+    float maxa = col.a;
+    float mina = col.a;
+
+
+    for(float x = -1.0; x <= 1.0; x+=0.05) {
+        float y = 1.0 - (x*x);
+        if(vec2(x,y) == vec2(0.0)) {
+            continue; // ignore the center of kernel
+        }
+
+        a = texture(TEXTURE, UV + vec2(x,y)*ps).a;
+        maxa = max(a, maxa); 
+        mina = min(a, mina);
+    }
+
+    for(float x = -1.0; x <= 1.0; x+=0.05) {
+        float y = -1.0 + (x*x);
+        if(vec2(x,y) == vec2(0.0)) {
+            continue; // ignore the center of kernel
+        }
+
+        a = texture(TEXTURE, UV + vec2(x,y)*ps).a;
+        maxa = max(a, maxa); 
+        mina = min(a, mina);
+    }
+
+
+    // Fill transparent pixels only, don't overlap texture
+    if(col.a < 0.5) {
+        COLOR = mix(col, outline_color, maxa-mina);
+    } else {
+        COLOR = col;
+    }
+}
+"
+custom_defines = ""
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+shader_param/outline_width = 0.0
+shader_param/outline_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 15.6343, 15.9578 )
+
+[node name="Key" type="Area2D" groups=[
+"interactable",
+]]
+position = Vector2( 294.314, 181.634 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 4 )
+scale = Vector2( 0.49488, 0.505941 )
+texture = ExtResource( 3 )
+region_rect = Rect2( -28, -12, 112.136, 95 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+[connection signal="area_entered" from="." to="." method="_on_Key_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_Key_area_exited"]
