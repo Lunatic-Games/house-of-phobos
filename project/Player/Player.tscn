@@ -1,4 +1,4 @@
-[gd_scene load_steps=134 format=2]
+[gd_scene load_steps=135 format=2]
 
 [ext_resource path="res://Player/Assets/feet/idle/survivor-idle_0.png" type="Texture" id=1]
 [ext_resource path="res://Player/Assets/feet/run/survivor-run_7.png" type="Texture" id=2]
@@ -124,6 +124,7 @@
 [ext_resource path="res://Player/Assets/flashlight_light.png" type="Texture" id=122]
 [ext_resource path="res://Player/Assets/player_light.png" type="Texture" id=123]
 [ext_resource path="res://Player/InteractArea.gd" type="Script" id=124]
+[ext_resource path="res://Player/Pistol/Pistol.tscn" type="PackedScene" id=125]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -271,7 +272,7 @@ collision_mask = 0
 script = ExtResource( 82 )
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -12.4786, -17.3993, 8.92715, -17.6966, 42.084, -14.2514, 40.2112, 3.3537, 43.2078, 16.4639, 8.92715, 21.2499, -13.0732, 18.2769, -18.4246, 11.7362, -24.3707, -6.99377 )
+polygon = PoolVector2Array( -12.4786, -17.3993, 8.92715, -17.6966, 28.4452, -12.1832, 27.6515, 2.89716, 31.2231, 13.4137, 8.92715, 21.2499, -13.0732, 18.2769, -18.4246, 11.7362, -24.3707, -6.99377 )
 
 [node name="Body" type="Node2D" parent="."]
 
@@ -311,7 +312,6 @@ energy = 0.75
 shadow_enabled = true
 
 [node name="Gun" type="Node2D" parent="Body/Top"]
-visible = false
 position = Vector2( -0.00048995, 0 )
 
 [node name="Sprite" type="Sprite" parent="Body/Top/Gun"]
@@ -331,6 +331,9 @@ offset = Vector2( 100, 0 )
 color = Color( 0.968627, 0.996078, 0.768627, 1 )
 energy = 0.75
 shadow_enabled = true
+
+[node name="Pistol" parent="Body/Top/Gun" instance=ExtResource( 125 )]
+position = Vector2( 18.5417, 11.1118 )
 
 [node name="FOVLight" type="Light2D" parent="Body"]
 position = Vector2( 12.1133, -0.170185 )

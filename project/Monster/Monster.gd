@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 
 const SPEED = 300
+const MAX_HEALTH = 5
+var health = 10
 var target_location
 
 func _physics_process(delta):
@@ -15,3 +17,10 @@ func _physics_process(delta):
 	if target_location:
 		var direction = (player.global_position - global_position).normalized()
 		move_and_slide(direction * SPEED)
+
+func damage(amount, knockback):
+	health -= amount
+	if health <= 0:
+		queue_free()
+	else:
+		position += knockback

@@ -10,9 +10,11 @@ enum Tools {Flashlight, Gun}
 var owned_tools = [Tools.Flashlight, Tools.Gun]
 var held_tool = Tools.Gun
 var keys = []
+onready var pistol = get_node("Body/Top/Gun/Pistol")
 
 func _ready():
 	change_held_tool(held_tool)
+	pistol.excludes.append(get_rid())
 
 # Handle user presses and check for mouse movement
 func _input(event):
@@ -22,6 +24,8 @@ func _input(event):
 		change_held_tool(Tools.Flashlight)
 	elif event.is_action_pressed("swap"):
 		change_held_tool((held_tool + 1) % len(Tools))
+	elif event.is_action_pressed("shoot"):
+		pistol.shoot($Body.rotation)
 	if event is InputEventMouseMotion:
 		mouse_look = true
 
@@ -46,6 +50,9 @@ func update_facing_direction():
 		$CollisionShape2D.rotation = $Body.rotation
 		mouse_look = false
 	if mouse_look:
+		#var mouse_dist = (get_viewport().get_mouse_position() - pistol.global_position).length()
+		#if mouse_dist > (pistol.global_position - global_position).length():
+		#	$Body.rotation = pistol.global_position.direction_to(get_viewport().get_mouse_position()).angle()
 		$Body.rotation = global_position.direction_to(get_viewport().get_mouse_position()).angle()
 		$CollisionShape2D.rotation = $Body.rotation
 

@@ -6,10 +6,10 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 42.9373, 5.04582 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 5.19405, 29.6673 )
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=3]
 resource_name = "close"
 tracks/0/type = "value"
 tracks/0/path = NodePath("StaticBody2D:rotation_degrees")
@@ -60,7 +60,7 @@ tracks/3/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=4]
 resource_name = "default"
 length = 0.001
 tracks/0/type = "value"
@@ -112,7 +112,7 @@ tracks/3/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "open"
 tracks/0/type = "value"
 tracks/0/path = NodePath("StaticBody2D:position")
@@ -175,7 +175,7 @@ tracks/4/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Shader" id=3]
+[sub_resource type="Shader" id=6]
 code = "shader_type canvas_item;
 uniform float outline_width = 2.0;
 uniform vec4 outline_color: hint_color;
@@ -224,52 +224,51 @@ void fragment(){
 "
 custom_defines = ""
 
-[sub_resource type="ShaderMaterial" id=4]
-shader = SubResource( 3 )
+[sub_resource type="ShaderMaterial" id=7]
+shader = SubResource( 6 )
 shader_param/outline_width = 0.0
 shader_param/outline_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 42.183, 4.32402 )
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 47.9218, 4.32402 )
 
-[sub_resource type="OccluderPolygon2D" id=5]
-polygon = PoolVector2Array( -23.0683, 0.408469, 20.9039, 0.427117, 20.9039, 0.922434, -23.0842, 0.815113 )
+[sub_resource type="OccluderPolygon2D" id=9]
+polygon = PoolVector2Array( -24.9864, 0.556288, 23.2021, 0.439804, 23.2474, 1.42992, -25.0317, 1.08047 )
 
 [node name="Door" type="Area2D" groups=[
 "interactable",
 ]]
 script = ExtResource( 2 )
-opened = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 43.1391, 0.207678 )
 shape = SubResource( 1 )
-disabled = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 position = Vector2( 4.63528, -33.0416 )
-shape = SubResource( 7 )
+shape = SubResource( 2 )
+disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "default"
-anims/close = SubResource( 9 )
-anims/default = SubResource( 8 )
-anims/open = SubResource( 6 )
+anims/close = SubResource( 3 )
+anims/default = SubResource( 4 )
+anims/open = SubResource( 5 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="StaticBody2D"]
-material = SubResource( 4 )
+material = SubResource( 7 )
 position = Vector2( 34.6259, -0.508864 )
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 42.2184, 0.422317 )
-shape = SubResource( 2 )
+shape = SubResource( 8 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="StaticBody2D"]
 position = Vector2( 44.5477, -0.823223 )
 scale = Vector2( 1.94978, 1.5176 )
-occluder = SubResource( 5 )
+occluder = SubResource( 9 )
 [connection signal="area_entered" from="." to="." method="_on_Door_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_Door_area_exited"]
