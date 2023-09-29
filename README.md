@@ -1,4 +1,6 @@
 # House Of Phobos
+A Godot prototype game with a horror theme.
+
 ▒▒▒░░░░░░░░░░▄▐░░░░  
 ▒░░░░░░▄▄▄░░▄██▄░░░  
 ░░░░░░▐▀█▀▌░░░░▀█▄░  
